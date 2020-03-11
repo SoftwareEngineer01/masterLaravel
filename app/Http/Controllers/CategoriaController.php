@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Categoria;
 
 class CategoriaController extends Controller
 {
@@ -13,7 +14,8 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+        $categorias = Categoria::all();
+        return view('categoria.index', compact('categorias'));
     }
 
     /**
@@ -23,7 +25,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('categoria.create');
     }
 
     /**
@@ -45,7 +47,9 @@ class CategoriaController extends Controller
      */
     public function show($id)
     {
-        //
+        $categoria = Categoria::find($id);
+
+        return view('categoria.show', compact('categoria'));
     }
 
     /**
@@ -81,4 +85,18 @@ class CategoriaController extends Controller
     {
         //
     }
+
+
+    public function formulario(){
+        return view('categoria.formulario');
+    }
+
+    public function recibir(Request $request){
+        $nombre = $request->input('nombre');
+
+        return 'Categoria => '.$nombre;
+    }
+
+
+
 }
